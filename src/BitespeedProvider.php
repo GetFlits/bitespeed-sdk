@@ -39,12 +39,12 @@ class BitespeedProvider {
     function POST($payload) {
         try {
             $response = $this->client->request($this->METHOD, $this->URL, [
-                'body' => $payload,
+                'body' => $payload, 
             ]);
         } catch (RequestException $ex) {
             throw new BitespeedException($ex->getResponse()->getBody()->getContents(), $ex->getResponse()->getStatusCode());
         }
-        if ($response->getStatusCode() != 202) {
+        if ($response->getStatusCode() != 200) {
             throw new BitespeedException($response->getBody()->getContents(), $response->getStatusCode());
         }
         return json_decode($response->getBody()->getContents());
